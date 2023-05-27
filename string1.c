@@ -85,3 +85,4 @@ int _putchar(char c)
 		buf[a++] = c;
 	return (1);
 }
+/** updated string1.c **/
