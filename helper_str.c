@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "ishell.h"
 
 /**
  * str_length - returns the length of a string.
@@ -66,7 +66,7 @@ int str_compare(char *string1, char *string2, int number)
 	if (string1 == NULL || string2 == NULL)
 		return (0);
 
-	if (number == 0) /* infinite longitud */
+	if (number == 0)
 	{
 		if (str_length(string1) != str_length(string2))
 			return (0);
@@ -77,7 +77,7 @@ int str_compare(char *string1, char *string2, int number)
 		}
 		return (1);
 	}
-	else /* if there is a number of chars to be compared */
+	else
 	{
 		for (iterator = 0; iterator < number ; iterator++)
 		{
@@ -116,12 +116,10 @@ char *str_concat(char *string1, char *string2)
 		return (NULL);
 	}
 
-	/* copy of string1 */
 	for (length1 = 0; string1[length1] != '\0'; length1++)
 		result[length1] = string1[length1];
 	free(string1);
 
-	/* copy of string2 */
 	for (length2 = 0; string2[length2] != '\0'; length2++)
 	{
 		result[length1] = string2[length2];
