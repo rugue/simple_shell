@@ -113,11 +113,11 @@ void sisifo(char *prompt, data_of_program *data)
 			split(data);
 			if (data->tokens[0])
 			{
-					status = run(data);
+				status = run(data);
 				if (status != 0)
 					_print_error(status, data);
 			}
 			free_recurrent_data(data);
 		}
 	}
-}	
+}

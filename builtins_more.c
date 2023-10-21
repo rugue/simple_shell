@@ -3,7 +3,7 @@
 /**
  * builtin_exit - Terminate the program with a status
  * @data: Struct for the program’s data
- * 
+ *
  * Return: 0 if successful, or another number if specified in the arguments
  */
 int builtin_exit(data_of_program *data)
@@ -28,7 +28,7 @@ int builtin_exit(data_of_program *data)
 /**
  * builtin_cd - Switch to a different directory
  * @data: Struct for the program’s data
- * 
+ *
  * Return: 0 if successful, or another number if specified in the arguments
  */
 int builtin_cd(data_of_program *data)
@@ -68,17 +68,18 @@ int builtin_cd(data_of_program *data)
  * set_work_directory - Update the working directory
  * @data: Struct for the program’s data
  * @new_dir: Path to be used as the working directory
- * 
+ *
  * Return: 0 if successful, or another number if specified in the arguments
  */
 int set_work_directory(data_of_program *data, char *new_dir)
 {
 	char buffer[128] = {0};
 	int err_code = 0;
-	
-	if (getcwd(buffer, 128) == NULL) {
+
+	if (getcwd(buffer, 128) == NULL)
+	{
 		perror("getcwd");
-		return 3;
+		return (3);
 	}
 
 	if (!str_compare(buffer, new_dir, 0))
@@ -98,7 +99,6 @@ int set_work_directory(data_of_program *data, char *new_dir)
 /**
  * builtin_help - Display the help information for the shell
  * @data: Struct for the program’s data
- * 
  * Return: 0 if successful, or another number if specified in the arguments
  */
 int builtin_help(data_of_program *data)
@@ -142,7 +142,7 @@ int builtin_help(data_of_program *data)
 /**
  * builtin_alias - Manage aliases for commands
  * @data: Struct for the program’s data
- * 
+ *
  * Return: 0 if successful, or another number if specified in the arguments
  */
 int builtin_alias(data_of_program *data)
