@@ -1,9 +1,9 @@
-#include "ishell.h"
+#include "shell.h"
 
 /**
- * long_to_string - this converts a number to a string.
- * @number: the number to be converten in an string.
- * @string: the buffer to save the number as string.
+ * long_to_string - converts a number to a string.
+ * @number: number to be converten in an string.
+ * @string: buffer to save the number as string.
  * @base: base to convert number
  *
  * Return: Nothing.
@@ -37,7 +37,7 @@ void long_to_string(long number, char *string, int base)
 
 
 /**
- * _atoi - converts a string to an integer.
+ * _atoi - convert a string to an integer.
  *
  * @s: pointer to str origen.
  * Return: int of string or 0.
@@ -75,12 +75,12 @@ int _atoi(char *s)
  */
 int count_characters(char *string, char *character)
 {
-	int i = 0, the_counter = 0;
+	int i = 0, counter = 0;
 
 	for (; string[i]; i++)
 	{
 		if (string[i] == character[0])
-			the_counter++;
+			counter++;
 	}
-	return (the_counter);
+	return (counter);
 }

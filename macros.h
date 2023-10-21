@@ -1,11 +1,16 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
+/* Prompt to be printed */
 #define PROMPT_MSG "$" /* Needed to work with signal */
 
+/* Resume from the unused attibute */
 #define UNUSED __attribute__((unused))
 
+/* buffer size for each read call in _getline */
 #define BUFFER_SIZE 1024
+
+/************* FORMATTED STRING FOR HELP BUILT IN **************/
 
 #define HELP_CD_MSG "cd=\n"\
 "cd:\tcd [dir]\n\n"\
@@ -19,7 +24,7 @@
 "exit:\texit [STATUS]\n\n"\
 "	Exit of the simple-shell.\n\n"\
 "	Exits the shell with a status of N.  If N is omitted, the exit status\n"\
-"	is that of the last command rund.\n\n"
+"	is that of the last command executed.\n\n"
 
 #define HELP_ENV_MSG "env=\n"\
 "env:\tenv \n\n"\
