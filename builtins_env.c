@@ -1,42 +1,45 @@
-#include "ishell.h"
+#include "shell.h"
 
 /**
- * builtin_env - displays the environment variables of the shell
+ * builtin_env - shows the environment where the shell runs
  * @data: struct for the program's data
- * Return: 0 if sucess, or other number if its declared in arguments
+ * Return: zero if sucess, or other number if its declared in the arguments
  */
 int builtin_env(data_of_program *data)
 {
-	int j;
-	char name_copy[50] = {'\0'};
-	char *value_copy = NULL;
+	int i;
+	char cpname[50] = {'\0'};
+	char *var_copy = NULL;
 
+	/* if not arguments */
 	if (data->tokens[1] == NULL)
 		print_environ(data);
 	else
 	{
-		for (j = 0; data->tokens[1][j]; j++)
-		{
-			if (data->tokens[1][j] == '=')
-			{
-				value_copy = str_duplicate(env_get_key(name_copy, data));
-				if (value_copy != NULL)
-					env_set_key(name_copy, data->tokens[1] + j + 1, data);
+		for (i = 0; data->tokens[1][i]; i++)
+		{/* checks if exists a char = */
+			if (data->tokens[1][i] == '=')
+			{/* checks if exists a var with the same name and change its value*/
+			/* temporally */
+				var_copy = str_duplicate(env_get_key(cpname, data));
+				if (var_copy != NULL)
+					env_set_key(cpname, data->tokens[1] + i + 1, data);
 
+				/* print the environ */
 				print_environ(data);
-				if (env_get_key(name_copy, data) == NULL)
-				{
+				if (env_get_key(cpname, data) == NULL)
+				{/* print the variable if it does not exist in the environ */
 					_print(data->tokens[1]);
 					_print("\n");
 				}
 				else
-				{
-					env_set_key(name_copy, value_copy, data);
-					free(value_copy);
+				{/* returns the old value of the var*/
+					env_set_key(cpname, var_copy, data);
+					free(var_copy);
 				}
 				return (0);
 			}
-			name_copy[j] = data->tokens[1][j];
+			cpname[i] = data->tokens[1][i];
 		}
 		errno = 2;
 		perror(data->command_name);
@@ -46,12 +49,13 @@ int builtin_env(data_of_program *data)
 }
 
 /**
- * builtin_set_env - Set a new environment variable or modify an existing 1
+ * builtin_set_env - ..
  * @data: struct for the program's data
- * Return: 0 if sucess, or other number if its declared in the arguments
+ * Return: zero if sucess, or other number if its declared in the arguments
  */
 int builtin_set_env(data_of_program *data)
 {
+	/* validate args */
 	if (data->tokens[1] == NULL || data->tokens[2] == NULL)
 		return (0);
 	if (data->tokens[3] != NULL)
@@ -67,12 +71,13 @@ int builtin_set_env(data_of_program *data)
 }
 
 /**
- * builtin_unset_env - Remove an existing environment variable
- * @data: struct for the program's data
- * Return: 0 if successful, or another number if specified in the arguments
+ * builtin_unset_env - ..
+ * @data: struct for the program's data'
+ * Return: ..
  */
 int builtin_unset_env(data_of_program *data)
 {
+	/* validate args */
 	if (data->tokens[1] == NULL)
 		return (0);
 	if (data->tokens[2] != NULL)

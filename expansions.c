@@ -1,12 +1,12 @@
-#include "ishell.h"
+#include "shell.h"
 
 /**
- * resolve_variables - to expand variables
- * @data: pointer to a struct of the program's data
+ * expand_variables - expand variables
+ * @data: a pointer to a struct of the program's data
  *
- * Return: nothtin, but sets errno.
+ * Return: nothing, but sets errno.
  */
-void resolve_variables(data_of_program *data)
+void expand_variables(data_of_program *data)
 {
 	int i, j;
 	char line[BUFFER_SIZE] = {0}, expansion[BUFFER_SIZE] = {'\0'}, *temp;
@@ -51,14 +51,14 @@ void resolve_variables(data_of_program *data)
 }
 
 /**
- * resolve_alias - expans aliases
+ * expand_alias - expans aliases
  * @data: a pointer to a struct of the program's data
  *
  * Return: nothing, but sets errno.
  */
-void resolve_alias(data_of_program *data)
+void expand_alias(data_of_program *data)
 {
-	int i, j, expanded = 0;
+	int i, j, was_expanded = 0;
 	char line[BUFFER_SIZE] = {0}, expansion[BUFFER_SIZE] = {'\0'}, *temp;
 
 	if (data->input_line == NULL)
@@ -81,11 +81,11 @@ void resolve_alias(data_of_program *data)
 			buffer_add(line, temp);
 			line[str_length(line)] = '\0';
 			buffer_add(line, expansion);
-			expanded = 1;
+			was_expanded = 1;
 		}
 		break;
 	}
-	if (expanded)
+	if (was_expanded)
 	{
 		free(data->input_line);
 		data->input_line = str_duplicate(line);
@@ -93,20 +93,20 @@ void resolve_alias(data_of_program *data)
 }
 
 /**
- * buffer_add - helps append string at end of the buffer
- * @buffer: the buffer to be filled
- * @str_to_add: the string to be copied in the buffer
- * Return: nothing, but sets the errno.
+ * buffer_add - append string at end of the buffer
+ * @buffer: buffer to be filled
+ * @str_to_add: string to be copied in the buffer
+ * Return: nothing, but sets errno.
  */
 int buffer_add(char *buffer, char *str_to_add)
 {
-	int len, i;
+	int length, i;
 
-	len = str_length(buffer);
+	length = str_length(buffer);
 	for (i = 0; str_to_add[i]; i++)
 	{
-		buffer[len + i] = str_to_add[i];
+		buffer[length + i] = str_to_add[i];
 	}
-	buffer[len + i] = '\0';
-	return (len + i);
+	buffer[length + i] = '\0';
+	return (length + i);
 }
